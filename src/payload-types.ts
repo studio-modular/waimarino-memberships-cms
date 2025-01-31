@@ -758,7 +758,6 @@ export interface Navigation {
         | {
             link: string;
             label: string;
-            description: string;
             id?: string | null;
             blockName?: string | null;
             blockType: 'link';
@@ -823,7 +822,6 @@ export interface NavigationSelect<T extends boolean = true> {
           | {
               link?: T;
               label?: T;
-              description?: T;
               id?: T;
               blockName?: T;
             };
