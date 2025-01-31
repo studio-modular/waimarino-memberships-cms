@@ -11,18 +11,42 @@ export interface Config {
     users: UserAuthOperations;
   };
   collections: {
+    images: Image;
+    pages: Page;
     users: User;
-    media: Media;
+    videos: Video;
+    'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  db: {
-    defaultIDType: string;
+  collectionsJoins: {};
+  collectionsSelect: {
+    images: ImagesSelect<false> | ImagesSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
-  globals: {};
+  db: {
+    defaultIDType: number;
+  };
+  globals: {
+    'home-page': HomePage;
+    navigation: Navigation;
+  };
+  globalsSelect: {
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
+  };
+  jobs: {
+    tasks: unknown;
+    workflows: unknown;
   };
 }
 export interface UserAuthOperations {
@@ -45,28 +69,129 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "images".
  */
-export interface User {
-  id: string;
+export interface Image {
+  id: number;
+  caption: string;
+  alternativeText: string;
+  blurhash?: string | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    'extra-large'?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
+ * via the `definition` "pages".
  */
-export interface Media {
-  id: string;
-  alt: string;
+export interface Page {
+  id: number;
+  title: string;
+  content?: (CarouselBlock | MediaBlock | Panels | RichText | Sections)[] | null;
+  slug: string;
+  slugLock?: boolean | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock".
+ */
+export interface CarouselBlock {
+  slides: {
+    asset:
+      | {
+          relationTo: 'images';
+          value: number | Image;
+        }
+      | {
+          relationTo: 'videos';
+          value: number | Video;
+        };
+    heading?: string | null;
+    description?: string | null;
+    buttons?:
+      | {
+          link: string;
+          label: string;
+          variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+          id?: string | null;
+        }[]
+      | null;
+    isFullScreen?: boolean | null;
+    width: string;
+    id?: string | null;
+  }[];
+  width: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: number;
+  caption: string;
+  cover: number | Image;
+  aspectRatio: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -81,13 +206,223 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock".
+ */
+export interface MediaBlock {
+  asset:
+    | {
+        relationTo: 'images';
+        value: number | Image;
+      }
+    | {
+        relationTo: 'videos';
+        value: number | Video;
+      };
+  heading?: string | null;
+  description?: string | null;
+  buttons?:
+    | {
+        link: string;
+        label: string;
+        variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+        id?: string | null;
+      }[]
+    | null;
+  isFullScreen?: boolean | null;
+  width: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'media';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Panels".
+ */
+export interface Panels {
+  heading?: string | null;
+  beforeText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  panels: {
+    heading?: string | null;
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    items?:
+      | {
+          label?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    moreDetails?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    buttons?:
+      | {
+          link: string;
+          label: string;
+          variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  afterText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  isFullScreen?: boolean | null;
+  color: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'panels';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichText".
+ */
+export interface RichText {
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  isFullScreen?: boolean | null;
+  color: string;
+  width: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'rich-text';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Sections".
+ */
+export interface Sections {
+  sections: (CarouselBlock | MediaBlock | RichText)[];
+  isFullScreen?: boolean | null;
+  color: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'sections-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  name: string;
+  role: 'General' | 'Marketer' | 'Administrator';
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents".
+ */
+export interface PayloadLockedDocument {
+  id: number;
+  document?:
+    | ({
+        relationTo: 'images';
+        value: number | Image;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: number | Video;
+      } | null);
+  globalSlug?: string | null;
+  user: {
+    relationTo: 'users';
+    value: number | User;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -107,11 +442,411 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "images_select".
+ */
+export interface ImagesSelect<T extends boolean = true> {
+  caption?: T;
+  alternativeText?: T;
+  blurhash?: T;
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        'extra-large'?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  content?:
+    | T
+    | {
+        carousel?: T | CarouselBlockSelect<T>;
+        media?: T | MediaBlockSelect<T>;
+        panels?: T | PanelsSelect<T>;
+        'rich-text'?: T | RichTextSelect<T>;
+        'sections-block'?: T | SectionsSelect<T>;
+      };
+  slug?: T;
+  slugLock?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock_select".
+ */
+export interface CarouselBlockSelect<T extends boolean = true> {
+  slides?:
+    | T
+    | {
+        asset?: T;
+        heading?: T;
+        description?: T;
+        buttons?:
+          | T
+          | {
+              link?: T;
+              label?: T;
+              variant?: T;
+              id?: T;
+            };
+        isFullScreen?: T;
+        width?: T;
+        id?: T;
+      };
+  width?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock_select".
+ */
+export interface MediaBlockSelect<T extends boolean = true> {
+  asset?: T;
+  heading?: T;
+  description?: T;
+  buttons?:
+    | T
+    | {
+        link?: T;
+        label?: T;
+        variant?: T;
+        id?: T;
+      };
+  isFullScreen?: T;
+  width?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Panels_select".
+ */
+export interface PanelsSelect<T extends boolean = true> {
+  heading?: T;
+  beforeText?: T;
+  panels?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              label?: T;
+              description?: T;
+              id?: T;
+            };
+        moreDetails?: T;
+        buttons?:
+          | T
+          | {
+              link?: T;
+              label?: T;
+              variant?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  afterText?: T;
+  isFullScreen?: T;
+  color?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichText_select".
+ */
+export interface RichTextSelect<T extends boolean = true> {
+  content?: T;
+  isFullScreen?: T;
+  color?: T;
+  width?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Sections_select".
+ */
+export interface SectionsSelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        carousel?: T | CarouselBlockSelect<T>;
+        media?: T | MediaBlockSelect<T>;
+        'rich-text'?: T | RichTextSelect<T>;
+      };
+  isFullScreen?: T;
+  color?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  caption?: T;
+  cover?: T;
+  aspectRatio?: T;
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents_select".
+ */
+export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences_select".
+ */
+export interface PayloadPreferencesSelect<T extends boolean = true> {
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations_select".
+ */
+export interface PayloadMigrationsSelect<T extends boolean = true> {
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
+  title: string;
+  content?: (CarouselBlock | MediaBlock | Panels | RichText | Sections)[] | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: number;
+  items?:
+    | (
+        | {
+            link: string;
+            label: string;
+            variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'button';
+          }
+        | Dropdown
+      )[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Dropdown".
+ */
+export interface Dropdown {
+  label: string;
+  links: {
+    link: string;
+    label: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'dropdown';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  title?: T;
+  content?:
+    | T
+    | {
+        carousel?: T | CarouselBlockSelect<T>;
+        media?: T | MediaBlockSelect<T>;
+        panels?: T | PanelsSelect<T>;
+        'rich-text'?: T | RichTextSelect<T>;
+        'sections-block'?: T | SectionsSelect<T>;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        button?:
+          | T
+          | {
+              link?: T;
+              label?: T;
+              variant?: T;
+              id?: T;
+              blockName?: T;
+            };
+        dropdown?: T | DropdownSelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Dropdown_select".
+ */
+export interface DropdownSelect<T extends boolean = true> {
+  label?: T;
+  links?:
+    | T
+    | {
+        link?: T;
+        label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
