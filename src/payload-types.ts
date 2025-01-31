@@ -758,10 +758,9 @@ export interface Navigation {
         | {
             link: string;
             label: string;
-            variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
             id?: string | null;
             blockName?: string | null;
-            blockType: 'button';
+            blockType: 'link';
           }
         | Dropdown
       )[]
@@ -817,12 +816,11 @@ export interface NavigationSelect<T extends boolean = true> {
   items?:
     | T
     | {
-        button?:
+        link?:
           | T
           | {
               link?: T;
               label?: T;
-              variant?: T;
               id?: T;
               blockName?: T;
             };

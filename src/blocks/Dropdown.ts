@@ -1,5 +1,5 @@
 import type { Block } from 'payload'
-import { LinkBlock } from '~/fields/link'
+import { LinkBlockWithDescription } from '~/fields/link'
 
 export const DropdownBlock: Block = {
   slug: 'dropdown',
@@ -16,7 +16,7 @@ export const DropdownBlock: Block = {
     },
     {
       type: 'array',
-      fields: [...LinkBlock.fields],
+      fields: [...LinkBlockWithDescription.fields],
       name: 'links',
       required: true,
       minRows: 1,

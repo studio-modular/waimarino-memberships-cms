@@ -37,6 +37,11 @@ export const LinkBlock: Block = {
   slug: 'link',
 }
 
+export const LinkBlockWithDescription: Block = {
+  fields: [LinkField, LabelField],
+  slug: 'link',
+}
+
 export const ButtonBlock: Block = {
   fields: [LinkField, LabelField, VariantField],
   slug: 'button',
