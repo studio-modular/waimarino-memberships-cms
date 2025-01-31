@@ -8,6 +8,9 @@ import { SectionsBlock } from '~/blocks/Sections'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       type: 'text',

@@ -4,6 +4,9 @@ import { LinkBlock } from '~/fields/link'
 
 export const Navigation: GlobalConfig = {
   slug: 'navigation',
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       type: 'blocks',

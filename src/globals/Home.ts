@@ -7,6 +7,9 @@ import { SectionsBlock } from '~/blocks/Sections'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       type: 'text',
