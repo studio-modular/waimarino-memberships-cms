@@ -1,6 +1,6 @@
 import type { GlobalConfig } from 'payload'
 import { DropdownBlock } from '~/blocks/Dropdown'
-import { LinkBlock } from '~/fields/link'
+import { LinkBlockWithDescription } from '~/fields/link'
 
 export const Navigation: GlobalConfig = {
   slug: 'navigation',
@@ -9,7 +9,7 @@ export const Navigation: GlobalConfig = {
       type: 'blocks',
       label: 'Items',
       name: 'items',
-      blocks: [LinkBlock, DropdownBlock],
+      blocks: [LinkBlockWithDescription, DropdownBlock],
     },
   ],
 }

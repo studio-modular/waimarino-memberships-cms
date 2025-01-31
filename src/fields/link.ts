@@ -23,6 +23,14 @@ export const LabelField: Field = {
   required: true,
 }
 
+export const DescriptionField: Field = {
+  name: 'description',
+  label: 'Description',
+  type: 'text',
+  defaultValue: '',
+  required: true,
+}
+
 export const VariantField: Field = {
   name: 'variant',
   label: 'Variant',
@@ -38,7 +46,7 @@ export const LinkBlock: Block = {
 }
 
 export const LinkBlockWithDescription: Block = {
-  fields: [LinkField, LabelField],
+  fields: [LinkField, LabelField, DescriptionField],
   slug: 'link',
 }
 
