@@ -1,5 +1,6 @@
 import AspectRatioField from '@/fields/aspect-ratio'
 import type { CollectionConfig } from 'payload'
+import { slugField } from '~/fields/slug'
 
 export const Videos: CollectionConfig = {
   slug: 'videos',
@@ -7,11 +8,22 @@ export const Videos: CollectionConfig = {
     read: () => true,
   },
   fields: [
+    ...slugField('title'),
+    {
+      name: 'title',
+      label: 'Title',
+      type: 'text',
+    },
     {
       name: 'caption',
       label: 'Caption',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'muxId',
+      label: 'Mux ID',
+      type: 'text',
     },
     {
       name: 'cover',

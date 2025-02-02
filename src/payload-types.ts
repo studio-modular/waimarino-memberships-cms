@@ -188,7 +188,11 @@ export interface CarouselBlock {
  */
 export interface Video {
   id: number;
+  slug: string;
+  slugLock?: boolean | null;
+  title?: string | null;
   caption: string;
+  muxId?: string | null;
   cover: number | Image;
   aspectRatio: string;
   prefix?: string | null;
@@ -272,6 +276,9 @@ export interface Panels {
       };
       [k: string]: unknown;
     } | null;
+    title?: string | null;
+    nextToTitle?: string | null;
+    byline?: string | null;
     items?:
       | {
           label?: string | null;
@@ -609,6 +616,9 @@ export interface PanelsSelect<T extends boolean = true> {
     | {
         heading?: T;
         description?: T;
+        title?: T;
+        nextToTitle?: T;
+        byline?: T;
         items?:
           | T
           | {
@@ -684,7 +694,11 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "videos_select".
  */
 export interface VideosSelect<T extends boolean = true> {
+  slug?: T;
+  slugLock?: T;
+  title?: T;
   caption?: T;
+  muxId?: T;
   cover?: T;
   aspectRatio?: T;
   prefix?: T;
@@ -758,6 +772,7 @@ export interface Navigation {
         | {
             link: string;
             label: string;
+            isDisabled: boolean;
             id?: string | null;
             blockName?: string | null;
             blockType: 'link';
@@ -778,6 +793,7 @@ export interface Dropdown {
     link: string;
     label: string;
     description: string;
+    isDisabled: boolean;
     id?: string | null;
   }[];
   id?: string | null;
@@ -822,6 +838,7 @@ export interface NavigationSelect<T extends boolean = true> {
           | {
               link?: T;
               label?: T;
+              isDisabled?: T;
               id?: T;
               blockName?: T;
             };
@@ -843,6 +860,7 @@ export interface DropdownSelect<T extends boolean = true> {
         link?: T;
         label?: T;
         description?: T;
+        isDisabled?: T;
         id?: T;
       };
   id?: T;

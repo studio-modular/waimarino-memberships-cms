@@ -40,13 +40,21 @@ export const VariantField: Field = {
   options: ['primary', 'secondary', 'outline', 'ghost', 'link'],
 }
 
+export const DisabledField: Field = {
+  name: 'isDisabled',
+  label: 'Disabled?',
+  type: 'checkbox',
+  required: true,
+  defaultValue: false,
+}
+
 export const LinkBlock: Block = {
-  fields: [LinkField, LabelField],
+  fields: [LinkField, LabelField, DisabledField],
   slug: 'link',
 }
 
 export const LinkBlockWithDescription: Block = {
-  fields: [LinkField, LabelField, DescriptionField],
+  fields: [LinkField, LabelField, DescriptionField, DisabledField],
   slug: 'link',
 }
 

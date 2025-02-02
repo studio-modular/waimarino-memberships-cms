@@ -15,6 +15,18 @@ export const PanelBlock: Block = {
       name: 'description',
     },
     {
+      type: 'text',
+      name: 'title',
+    },
+    {
+      type: 'text',
+      name: 'nextToTitle',
+    },
+    {
+      type: 'text',
+      name: 'byline',
+    },
+    {
       type: 'array',
       name: 'items',
       fields: [
