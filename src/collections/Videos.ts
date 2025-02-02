@@ -21,8 +21,8 @@ export const Videos: CollectionConfig = {
       required: true,
     },
     {
-      name: 'muxId',
-      label: 'Mux ID',
+      name: 'muxPlaybackId',
+      label: 'Mux Playback ID',
       type: 'text',
     },
     {
@@ -34,8 +34,8 @@ export const Videos: CollectionConfig = {
     },
     AspectRatioField,
   ],
-  upload: {
-    mimeTypes: ['video/mp4'],
-    staticDir: 'media',
-  },
+  // upload: {
+  //   mimeTypes: ['video/mp4'],
+  //   staticDir: 'media',
+  // },
 }
