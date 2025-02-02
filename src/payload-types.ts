@@ -195,6 +195,7 @@ export interface Video {
   muxPlaybackId: string;
   cover: number | Image;
   aspectRatio: string;
+  isFeatured: boolean;
   updatedAt: string;
   createdAt: string;
 }
@@ -771,6 +772,7 @@ export interface VideosSelect<T extends boolean = true> {
   muxPlaybackId?: T;
   cover?: T;
   aspectRatio?: T;
+  isFeatured?: T;
   updatedAt?: T;
   createdAt?: T;
 }

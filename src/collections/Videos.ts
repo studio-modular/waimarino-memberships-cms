@@ -35,6 +35,13 @@ export const Videos: CollectionConfig = {
       relationTo: 'images',
     },
     AspectRatioField,
+    {
+      name: 'isFeatured',
+      label: 'Featured?',
+      type: 'checkbox',
+      defaultValue: true,
+      required: true,
+    },
   ],
   // upload: {
   //   mimeTypes: ['video/mp4'],
