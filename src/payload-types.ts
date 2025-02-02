@@ -138,7 +138,7 @@ export interface Image {
 export interface Page {
   id: number;
   title: string;
-  content?: (CarouselBlock | MediaBlock | Panels | RichText | Sections)[] | null;
+  content?: (CarouselBlock | MediaBlock | Panels | RichText | Sections | Timeline)[] | null;
   slug: string;
   slugLock?: boolean | null;
   meta?: {
@@ -373,6 +373,67 @@ export interface Sections {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Timeline".
+ */
+export interface Timeline {
+  heading?: string | null;
+  beforeText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  milestones?:
+    | {
+        title?: string | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  afterText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'timeline';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -544,6 +605,7 @@ export interface PagesSelect<T extends boolean = true> {
         panels?: T | PanelsSelect<T>;
         'rich-text'?: T | RichTextSelect<T>;
         'sections-block'?: T | SectionsSelect<T>;
+        timeline?: T | TimelineSelect<T>;
       };
   slug?: T;
   slugLock?: T;
@@ -674,6 +736,24 @@ export interface SectionsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Timeline_select".
+ */
+export interface TimelineSelect<T extends boolean = true> {
+  heading?: T;
+  beforeText?: T;
+  milestones?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  afterText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
@@ -753,7 +833,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface HomePage {
   id: number;
   title: string;
-  content?: (CarouselBlock | MediaBlock | Panels | RichText | Sections)[] | null;
+  content?: (CarouselBlock | MediaBlock | Panels | RichText | Sections | Timeline)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -814,6 +894,7 @@ export interface HomePageSelect<T extends boolean = true> {
         panels?: T | PanelsSelect<T>;
         'rich-text'?: T | RichTextSelect<T>;
         'sections-block'?: T | SectionsSelect<T>;
+        timeline?: T | TimelineSelect<T>;
       };
   meta?:
     | T

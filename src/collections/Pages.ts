@@ -5,6 +5,7 @@ import { RichTextBlock } from '@/blocks/TextField'
 import { slugField } from '@/fields/slug'
 import type { CollectionConfig } from 'payload'
 import { SectionsBlock } from '~/blocks/Sections'
+import { TimelineBlock } from '~/blocks/Timeline'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -23,7 +24,7 @@ export const Pages: CollectionConfig = {
       type: 'blocks',
       label: 'Content',
       name: 'content',
-      blocks: [CarouselBlock, MediaBlock, PanelsBlock, RichTextBlock, SectionsBlock],
+      blocks: [CarouselBlock, MediaBlock, PanelsBlock, RichTextBlock, SectionsBlock, TimelineBlock],
     },
     ...slugField('title'),
   ],

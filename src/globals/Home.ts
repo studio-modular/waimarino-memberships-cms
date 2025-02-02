@@ -4,6 +4,7 @@ import { PanelsBlock } from '@/blocks/Panel'
 import { RichTextBlock } from '@/blocks/TextField'
 import type { GlobalConfig } from 'payload'
 import { SectionsBlock } from '~/blocks/Sections'
+import { TimelineBlock } from '~/blocks/Timeline'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
@@ -21,7 +22,7 @@ export const HomePage: GlobalConfig = {
       type: 'blocks',
       label: 'Content',
       name: 'content',
-      blocks: [CarouselBlock, MediaBlock, PanelsBlock, RichTextBlock, SectionsBlock],
+      blocks: [CarouselBlock, MediaBlock, PanelsBlock, RichTextBlock, SectionsBlock, TimelineBlock],
     },
   ],
 }
