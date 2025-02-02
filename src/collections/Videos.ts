@@ -13,6 +13,7 @@ export const Videos: CollectionConfig = {
       name: 'title',
       label: 'Title',
       type: 'text',
+      required: true,
     },
     {
       name: 'caption',
@@ -24,6 +25,7 @@ export const Videos: CollectionConfig = {
       name: 'muxPlaybackId',
       label: 'Mux Playback ID',
       type: 'text',
+      required: true,
     },
     {
       name: 'cover',
