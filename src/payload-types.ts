@@ -138,7 +138,19 @@ export interface Image {
 export interface Page {
   id: number;
   title: string;
-  content?: (CarouselBlock | ImagesBlock | MediaBlock | Panels | RichText | Sections | Timeline)[] | null;
+  content?:
+    | (
+        | CarouselBlock
+        | ContactFormBlock
+        | ImagesBlock
+        | MediaBlock
+        | Panels
+        | PartnershipsFormBlock
+        | RichText
+        | Sections
+        | Timeline
+      )[]
+    | null;
   slug: string;
   slugLock?: boolean | null;
   meta?: {
@@ -198,6 +210,46 @@ export interface Video {
   isFeatured: boolean;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormBlock".
+ */
+export interface ContactFormBlock {
+  heading?: string | null;
+  beforeText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  afterText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact-form';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -337,6 +389,46 @@ export interface Panels {
   id?: string | null;
   blockName?: string | null;
   blockType: 'panels';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PartnershipsFormBlock".
+ */
+export interface PartnershipsFormBlock {
+  heading?: string | null;
+  beforeText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  afterText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'partnerships-form';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -607,9 +699,11 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         carousel?: T | CarouselBlockSelect<T>;
+        'contact-form'?: T | ContactFormBlockSelect<T>;
         'images-block'?: T | ImagesBlockSelect<T>;
         media?: T | MediaBlockSelect<T>;
         panels?: T | PanelsSelect<T>;
+        'partnerships-form'?: T | PartnershipsFormBlockSelect<T>;
         'rich-text'?: T | RichTextSelect<T>;
         'sections-block'?: T | SectionsSelect<T>;
         timeline?: T | TimelineSelect<T>;
@@ -649,6 +743,17 @@ export interface CarouselBlockSelect<T extends boolean = true> {
         id?: T;
       };
   width?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormBlock_select".
+ */
+export interface ContactFormBlockSelect<T extends boolean = true> {
+  heading?: T;
+  beforeText?: T;
+  afterText?: T;
   id?: T;
   blockName?: T;
 }
@@ -723,6 +828,17 @@ export interface PanelsSelect<T extends boolean = true> {
   afterText?: T;
   isFullScreen?: T;
   color?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PartnershipsFormBlock_select".
+ */
+export interface PartnershipsFormBlockSelect<T extends boolean = true> {
+  heading?: T;
+  beforeText?: T;
+  afterText?: T;
   id?: T;
   blockName?: T;
 }
@@ -845,7 +961,19 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface HomePage {
   id: number;
   title: string;
-  content?: (CarouselBlock | ImagesBlock | MediaBlock | Panels | RichText | Sections | Timeline)[] | null;
+  content?:
+    | (
+        | CarouselBlock
+        | ContactFormBlock
+        | ImagesBlock
+        | MediaBlock
+        | Panels
+        | PartnershipsFormBlock
+        | RichText
+        | Sections
+        | Timeline
+      )[]
+    | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -902,9 +1030,11 @@ export interface HomePageSelect<T extends boolean = true> {
     | T
     | {
         carousel?: T | CarouselBlockSelect<T>;
+        'contact-form'?: T | ContactFormBlockSelect<T>;
         'images-block'?: T | ImagesBlockSelect<T>;
         media?: T | MediaBlockSelect<T>;
         panels?: T | PanelsSelect<T>;
+        'partnerships-form'?: T | PartnershipsFormBlockSelect<T>;
         'rich-text'?: T | RichTextSelect<T>;
         'sections-block'?: T | SectionsSelect<T>;
         timeline?: T | TimelineSelect<T>;
