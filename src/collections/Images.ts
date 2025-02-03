@@ -5,6 +5,9 @@ export const Images: CollectionConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    useAsTitle: 'title',
+  },
   fields: [
     {
       name: 'caption',

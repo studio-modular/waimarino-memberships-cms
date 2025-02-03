@@ -4,9 +4,13 @@ import { slugField } from '~/fields/slug'
 
 export const Videos: CollectionConfig = {
   slug: 'videos',
+  admin: {
+    useAsTitle: 'title',
+  },
   access: {
     read: () => true,
   },
+
   fields: [
     ...slugField('title'),
     {
