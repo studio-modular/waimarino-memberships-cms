@@ -138,7 +138,7 @@ export interface Image {
 export interface Page {
   id: number;
   title: string;
-  content?: (CarouselBlock | MediaBlock | Panels | RichText | Sections | Timeline)[] | null;
+  content?: (CarouselBlock | ImagesBlock | MediaBlock | Panels | RichText | Sections | Timeline)[] | null;
   slug: string;
   slugLock?: boolean | null;
   meta?: {
@@ -198,6 +198,21 @@ export interface Video {
   isFeatured: boolean;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImagesBlock".
+ */
+export interface ImagesBlock {
+  images?:
+    | {
+        image?: (number | null) | Image;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'images-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -592,6 +607,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         carousel?: T | CarouselBlockSelect<T>;
+        'images-block'?: T | ImagesBlockSelect<T>;
         media?: T | MediaBlockSelect<T>;
         panels?: T | PanelsSelect<T>;
         'rich-text'?: T | RichTextSelect<T>;
@@ -633,6 +649,20 @@ export interface CarouselBlockSelect<T extends boolean = true> {
         id?: T;
       };
   width?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImagesBlock_select".
+ */
+export interface ImagesBlockSelect<T extends boolean = true> {
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -815,7 +845,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface HomePage {
   id: number;
   title: string;
-  content?: (CarouselBlock | MediaBlock | Panels | RichText | Sections | Timeline)[] | null;
+  content?: (CarouselBlock | ImagesBlock | MediaBlock | Panels | RichText | Sections | Timeline)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -872,6 +902,7 @@ export interface HomePageSelect<T extends boolean = true> {
     | T
     | {
         carousel?: T | CarouselBlockSelect<T>;
+        'images-block'?: T | ImagesBlockSelect<T>;
         media?: T | MediaBlockSelect<T>;
         panels?: T | PanelsSelect<T>;
         'rich-text'?: T | RichTextSelect<T>;
