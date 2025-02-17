@@ -35,3 +35,21 @@ export const MediaBlock: Block = {
     WidthField,
   ],
 }
+
+export const SectionMedia: Block = {
+  slug: 'section-media',
+  interfaceName: 'SectionMedia',
+  fields: [
+    {
+      name: 'asset',
+      label: 'Asset',
+      required: true,
+      relationTo: ['images', 'videos'],
+      type: 'relationship',
+    },
+    {
+      name: 'description',
+      type: 'text',
+    },
+  ],
+}

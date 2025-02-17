@@ -20,6 +20,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 import invariant from 'tiny-invariant'
+import { Location } from './globals/Location'
 
 invariant(env.PAYLOAD_SECRET)
 invariant(env.DATABASE_URI)
@@ -38,7 +39,7 @@ export default buildConfig({
     },
   },
   collections: [Images, Pages, Users, Videos],
-  globals: [HomePage, Navigation],
+  globals: [HomePage, Location, Navigation],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -93,7 +94,7 @@ export default buildConfig({
       enabled: true,
     }),
     seoPlugin({
-      globals: ['home-page'],
+      globals: ['home-page', 'location'],
       collections: ['pages'],
       tabbedUI: true,
       generateTitle: ({ doc }) => `${doc.title} | Waimarino Lodge`,
