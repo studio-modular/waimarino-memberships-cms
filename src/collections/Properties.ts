@@ -28,6 +28,11 @@ export const Properties: CollectionConfig = {
       required: true,
     },
     {
+      type: 'textarea',
+      label: 'Description',
+      name: 'description',
+    },
+    {
       type: 'richText',
       label: 'Content',
       name: 'content',

@@ -545,6 +545,7 @@ export interface Property {
   title: string;
   subtitle: string;
   startingPrice: string;
+  description?: string | null;
   content: {
     root: {
       type: string;
@@ -955,6 +956,7 @@ export interface PropertiesSelect<T extends boolean = true> {
   title?: T;
   subtitle?: T;
   startingPrice?: T;
+  description?: T;
   content?: T;
   media?:
     | T
