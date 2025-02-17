@@ -21,6 +21,7 @@ const dirname = path.dirname(filename)
 
 import invariant from 'tiny-invariant'
 import { Location } from './globals/Location'
+import { Properties } from './collections/Properties'
 
 invariant(env.PAYLOAD_SECRET)
 invariant(env.DATABASE_URI)
@@ -38,7 +39,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Images, Pages, Users, Videos],
+  collections: [Images, Pages, Properties, Users, Videos],
   globals: [HomePage, Location, Navigation],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -95,7 +96,7 @@ export default buildConfig({
     }),
     seoPlugin({
       globals: ['home-page', 'location'],
-      collections: ['pages'],
+      collections: ['pages', 'properties'],
       tabbedUI: true,
       generateTitle: ({ doc }) => `${doc.title} | Waimarino Lodge`,
     }),

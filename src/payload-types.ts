@@ -13,6 +13,7 @@ export interface Config {
   collections: {
     images: Image;
     pages: Page;
+    properties: Property;
     users: User;
     videos: Video;
     'payload-locked-documents': PayloadLockedDocument;
@@ -23,6 +24,7 @@ export interface Config {
   collectionsSelect: {
     images: ImagesSelect<false> | ImagesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    properties: PropertiesSelect<false> | PropertiesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     videos: VideosSelect<false> | VideosSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -534,6 +536,54 @@ export interface Timeline {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "properties".
+ */
+export interface Property {
+  id: number;
+  slug: string;
+  slugLock?: boolean | null;
+  title: string;
+  subtitle: string;
+  startingPrice: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  media?:
+    | {
+        asset:
+          | {
+              relationTo: 'images';
+              value: number | Image;
+            }
+          | {
+              relationTo: 'videos';
+              value: number | Video;
+            };
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -565,6 +615,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'properties';
+        value: number | Property;
       } | null)
     | ({
         relationTo: 'users';
@@ -890,6 +944,33 @@ export interface TimelineSelect<T extends boolean = true> {
   afterText?: T;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "properties_select".
+ */
+export interface PropertiesSelect<T extends boolean = true> {
+  slug?: T;
+  slugLock?: T;
+  title?: T;
+  subtitle?: T;
+  startingPrice?: T;
+  content?: T;
+  media?:
+    | T
+    | {
+        asset?: T;
+        description?: T;
+        id?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
