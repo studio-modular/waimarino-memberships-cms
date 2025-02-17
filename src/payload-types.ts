@@ -545,7 +545,7 @@ export interface Property {
   title: string;
   subtitle: string;
   startingPrice: string;
-  description?: string | null;
+  description: string;
   content: {
     root: {
       type: string;
