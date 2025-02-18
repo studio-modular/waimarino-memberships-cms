@@ -12,7 +12,6 @@ export interface Config {
   };
   collections: {
     images: Image;
-    pages: Page;
     properties: Property;
     users: User;
     videos: Video;
@@ -23,7 +22,6 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     images: ImagesSelect<false> | ImagesSelect<true>;
-    pages: PagesSelect<false> | PagesSelect<true>;
     properties: PropertiesSelect<false> | PropertiesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     videos: VideosSelect<false> | VideosSelect<true>;
@@ -137,405 +135,6 @@ export interface Image {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
- */
-export interface Page {
-  id: number;
-  title: string;
-  content?:
-    | (
-        | CarouselBlock
-        | ContactFormBlock
-        | ImagesBlock
-        | MediaBlock
-        | Panels
-        | PartnershipsFormBlock
-        | RichText
-        | Sections
-        | Timeline
-      )[]
-    | null;
-  slug: string;
-  slugLock?: boolean | null;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CarouselBlock".
- */
-export interface CarouselBlock {
-  slides: {
-    asset:
-      | {
-          relationTo: 'images';
-          value: number | Image;
-        }
-      | {
-          relationTo: 'videos';
-          value: number | Video;
-        };
-    heading?: string | null;
-    description?: string | null;
-    buttons?:
-      | {
-          link: string;
-          label: string;
-          variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
-          id?: string | null;
-        }[]
-      | null;
-    isFullScreen?: boolean | null;
-    width: string;
-    id?: string | null;
-  }[];
-  width: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'carousel';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "videos".
- */
-export interface Video {
-  id: number;
-  slug: string;
-  slugLock?: boolean | null;
-  title: string;
-  caption: string;
-  muxPlaybackId: string;
-  cover: number | Image;
-  aspectRatio: string;
-  isFeatured: boolean;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContactFormBlock".
- */
-export interface ContactFormBlock {
-  heading?: string | null;
-  beforeText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  afterText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'contact-form';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ImagesBlock".
- */
-export interface ImagesBlock {
-  images?:
-    | {
-        image?: (number | null) | Image;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'images-block';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock".
- */
-export interface MediaBlock {
-  asset:
-    | {
-        relationTo: 'images';
-        value: number | Image;
-      }
-    | {
-        relationTo: 'videos';
-        value: number | Video;
-      };
-  heading?: string | null;
-  description?: string | null;
-  buttons?:
-    | {
-        link: string;
-        label: string;
-        variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
-        id?: string | null;
-      }[]
-    | null;
-  isFullScreen?: boolean | null;
-  width: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'media';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Panels".
- */
-export interface Panels {
-  heading?: string | null;
-  beforeText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  panels: {
-    heading?: string | null;
-    description?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    title?: string | null;
-    nextToTitle?: string | null;
-    byline?: string | null;
-    items?:
-      | {
-          label?: string | null;
-          description?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-    moreDetails?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    buttons?:
-      | {
-          link: string;
-          label: string;
-          variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
-          id?: string | null;
-        }[]
-      | null;
-    id?: string | null;
-  }[];
-  afterText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  isFullScreen?: boolean | null;
-  color: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'panels';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "PartnershipsFormBlock".
- */
-export interface PartnershipsFormBlock {
-  heading?: string | null;
-  beforeText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  afterText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'partnerships-form';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "RichText".
- */
-export interface RichText {
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  isFullScreen?: boolean | null;
-  color: string;
-  width: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'rich-text';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Sections".
- */
-export interface Sections {
-  sections: (CarouselBlock | MediaBlock | RichText)[];
-  isFullScreen?: boolean | null;
-  color: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'sections-block';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Timeline".
- */
-export interface Timeline {
-  heading?: string | null;
-  beforeText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  milestones?:
-    | {
-        title?: string | null;
-        content?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        id?: string | null;
-      }[]
-    | null;
-  afterText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'timeline';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "properties".
  */
 export interface Property {
@@ -585,6 +184,23 @@ export interface Property {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: number;
+  slug: string;
+  slugLock?: boolean | null;
+  title: string;
+  caption: string;
+  muxPlaybackId: string;
+  cover: number | Image;
+  aspectRatio: string;
+  isFeatured: boolean;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -612,10 +228,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'images';
         value: number | Image;
-      } | null)
-    | ({
-        relationTo: 'pages';
-        value: number | Page;
       } | null)
     | ({
         relationTo: 'properties';
@@ -748,206 +360,6 @@ export interface ImagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages_select".
- */
-export interface PagesSelect<T extends boolean = true> {
-  title?: T;
-  content?:
-    | T
-    | {
-        carousel?: T | CarouselBlockSelect<T>;
-        'contact-form'?: T | ContactFormBlockSelect<T>;
-        'images-block'?: T | ImagesBlockSelect<T>;
-        media?: T | MediaBlockSelect<T>;
-        panels?: T | PanelsSelect<T>;
-        'partnerships-form'?: T | PartnershipsFormBlockSelect<T>;
-        'rich-text'?: T | RichTextSelect<T>;
-        'sections-block'?: T | SectionsSelect<T>;
-        timeline?: T | TimelineSelect<T>;
-      };
-  slug?: T;
-  slugLock?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CarouselBlock_select".
- */
-export interface CarouselBlockSelect<T extends boolean = true> {
-  slides?:
-    | T
-    | {
-        asset?: T;
-        heading?: T;
-        description?: T;
-        buttons?:
-          | T
-          | {
-              link?: T;
-              label?: T;
-              variant?: T;
-              id?: T;
-            };
-        isFullScreen?: T;
-        width?: T;
-        id?: T;
-      };
-  width?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContactFormBlock_select".
- */
-export interface ContactFormBlockSelect<T extends boolean = true> {
-  heading?: T;
-  beforeText?: T;
-  afterText?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ImagesBlock_select".
- */
-export interface ImagesBlockSelect<T extends boolean = true> {
-  images?:
-    | T
-    | {
-        image?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock_select".
- */
-export interface MediaBlockSelect<T extends boolean = true> {
-  asset?: T;
-  heading?: T;
-  description?: T;
-  buttons?:
-    | T
-    | {
-        link?: T;
-        label?: T;
-        variant?: T;
-        id?: T;
-      };
-  isFullScreen?: T;
-  width?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Panels_select".
- */
-export interface PanelsSelect<T extends boolean = true> {
-  heading?: T;
-  beforeText?: T;
-  panels?:
-    | T
-    | {
-        heading?: T;
-        description?: T;
-        title?: T;
-        nextToTitle?: T;
-        byline?: T;
-        items?:
-          | T
-          | {
-              label?: T;
-              description?: T;
-              id?: T;
-            };
-        moreDetails?: T;
-        buttons?:
-          | T
-          | {
-              link?: T;
-              label?: T;
-              variant?: T;
-              id?: T;
-            };
-        id?: T;
-      };
-  afterText?: T;
-  isFullScreen?: T;
-  color?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "PartnershipsFormBlock_select".
- */
-export interface PartnershipsFormBlockSelect<T extends boolean = true> {
-  heading?: T;
-  beforeText?: T;
-  afterText?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "RichText_select".
- */
-export interface RichTextSelect<T extends boolean = true> {
-  content?: T;
-  isFullScreen?: T;
-  color?: T;
-  width?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Sections_select".
- */
-export interface SectionsSelect<T extends boolean = true> {
-  sections?:
-    | T
-    | {
-        carousel?: T | CarouselBlockSelect<T>;
-        media?: T | MediaBlockSelect<T>;
-        'rich-text'?: T | RichTextSelect<T>;
-      };
-  isFullScreen?: T;
-  color?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Timeline_select".
- */
-export interface TimelineSelect<T extends boolean = true> {
-  heading?: T;
-  beforeText?: T;
-  milestones?:
-    | T
-    | {
-        title?: T;
-        content?: T;
-        id?: T;
-      };
-  afterText?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "properties_select".
  */
 export interface PropertiesSelect<T extends boolean = true> {
@@ -1070,7 +482,6 @@ export interface HomePage {
         | Section10Block
         | Section11Block
         | Section12Block
-        | Section13Block
       )[]
     | null;
   meta?: {
@@ -1410,6 +821,7 @@ export interface Section09Block {
     };
     [k: string]: unknown;
   };
+  mediaBlockOne: (SectionCarousel | SectionMedia)[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'section-09-block';
@@ -1419,19 +831,38 @@ export interface Section09Block {
  * via the `definition` "Section10Block".
  */
 export interface Section10Block {
-  slides: {
-    asset:
-      | {
-          relationTo: 'images';
-          value: number | Image;
-        }
-      | {
-          relationTo: 'videos';
-          value: number | Video;
-        };
-    description?: string | null;
-    id?: string | null;
-  }[];
+  heading: string;
+  copyOne: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  copyTwo: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  mediaBlockOne: (SectionCarousel | SectionMedia)[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'section-10-block';
@@ -1454,6 +885,15 @@ export interface Section11Block {
     description?: string | null;
     id?: string | null;
   }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'section-11-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Section12Block".
+ */
+export interface Section12Block {
   heading: string;
   copyOne: {
     root: {
@@ -1472,48 +912,7 @@ export interface Section11Block {
   };
   id?: string | null;
   blockName?: string | null;
-  blockType: 'section-11-block';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Section12Block".
- */
-export interface Section12Block {
-  asset:
-    | {
-        relationTo: 'images';
-        value: number | Image;
-      }
-    | {
-        relationTo: 'videos';
-        value: number | Video;
-      };
-  description?: string | null;
-  id?: string | null;
-  blockName?: string | null;
   blockType: 'section-12-block';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Section13Block".
- */
-export interface Section13Block {
-  slides: {
-    asset:
-      | {
-          relationTo: 'images';
-          value: number | Image;
-        }
-      | {
-          relationTo: 'videos';
-          value: number | Video;
-        };
-    description?: string | null;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'section-13-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1546,7 +945,6 @@ export interface Location {
         | Section10Block
         | Section11Block
         | Section12Block
-        | Section13Block
       )[]
     | null;
   meta?: {
@@ -1618,7 +1016,6 @@ export interface HomePageSelect<T extends boolean = true> {
         'section-10-block'?: T | Section10BlockSelect<T>;
         'section-11-block'?: T | Section11BlockSelect<T>;
         'section-12-block'?: T | Section12BlockSelect<T>;
-        'section-13-block'?: T | Section13BlockSelect<T>;
       };
   meta?:
     | T
@@ -1799,6 +1196,12 @@ export interface Section08BlockSelect<T extends boolean = true> {
 export interface Section09BlockSelect<T extends boolean = true> {
   heading?: T;
   copyOne?: T;
+  mediaBlockOne?:
+    | T
+    | {
+        'section-carousel'?: T | SectionCarouselSelect<T>;
+        'section-media'?: T | SectionMediaSelect<T>;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1807,12 +1210,14 @@ export interface Section09BlockSelect<T extends boolean = true> {
  * via the `definition` "Section10Block_select".
  */
 export interface Section10BlockSelect<T extends boolean = true> {
-  slides?:
+  heading?: T;
+  copyOne?: T;
+  copyTwo?: T;
+  mediaBlockOne?:
     | T
     | {
-        asset?: T;
-        description?: T;
-        id?: T;
+        'section-carousel'?: T | SectionCarouselSelect<T>;
+        'section-media'?: T | SectionMediaSelect<T>;
       };
   id?: T;
   blockName?: T;
@@ -1829,8 +1234,6 @@ export interface Section11BlockSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
-  heading?: T;
-  copyOne?: T;
   id?: T;
   blockName?: T;
 }
@@ -1839,23 +1242,8 @@ export interface Section11BlockSelect<T extends boolean = true> {
  * via the `definition` "Section12Block_select".
  */
 export interface Section12BlockSelect<T extends boolean = true> {
-  asset?: T;
-  description?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Section13Block_select".
- */
-export interface Section13BlockSelect<T extends boolean = true> {
-  slides?:
-    | T
-    | {
-        asset?: T;
-        description?: T;
-        id?: T;
-      };
+  heading?: T;
+  copyOne?: T;
   id?: T;
   blockName?: T;
 }
@@ -1882,7 +1270,6 @@ export interface LocationSelect<T extends boolean = true> {
         'section-10-block'?: T | Section10BlockSelect<T>;
         'section-11-block'?: T | Section11BlockSelect<T>;
         'section-12-block'?: T | Section12BlockSelect<T>;
-        'section-13-block'?: T | Section13BlockSelect<T>;
       };
   meta?:
     | T

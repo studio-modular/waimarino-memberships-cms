@@ -11,7 +11,6 @@ import { Images } from './collections/Images'
 import { Users } from './collections/Users'
 import { HomePage } from './globals/Home'
 import { Videos } from './collections/Videos'
-import { Pages } from './collections/Pages'
 import { Navigation } from './globals/Navigation'
 import { env } from 'process'
 import { s3Storage } from '@payloadcms/storage-s3'
@@ -39,7 +38,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Images, Pages, Properties, Users, Videos],
+  collections: [Images, Properties, Users, Videos],
   globals: [HomePage, Location, Navigation],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -78,11 +77,6 @@ export default buildConfig({
             `${env.CLOUDFRONT_DISTRIBUTION}/${prefix}/${filename}`,
           prefix: 'images',
         },
-        // videos: {
-        //   generateFileURL: ({ filename, prefix }) =>
-        //     `${env.CLOUDFRONT_DISTRIBUTION}/${prefix}/${filename}`,
-        //   prefix: 'videos',
-        // },
       },
       config: {
         credentials: {
@@ -96,7 +90,7 @@ export default buildConfig({
     }),
     seoPlugin({
       globals: ['home-page', 'location'],
-      collections: ['pages', 'properties'],
+      collections: ['properties'],
       tabbedUI: true,
       generateTitle: ({ doc }) => `${doc.title} | Waimarino Lodge`,
     }),

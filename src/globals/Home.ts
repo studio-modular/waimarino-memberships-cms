@@ -12,7 +12,6 @@ import {
   Section10,
   Section11,
   Section12,
-  Section13,
 } from '../blocks/sections/design-group'
 
 export const HomePage: GlobalConfig = {
@@ -55,7 +54,7 @@ export const HomePage: GlobalConfig = {
         Section10,
         Section11,
         Section12,
-        Section13,
+        // Section13,
       ],
     },
   ],

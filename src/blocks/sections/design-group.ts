@@ -1,7 +1,6 @@
 import type { Block } from 'payload'
 import { SectionContent, SectionHeading, SectionMediaBlock } from './utils'
 import { SectionCarousel } from '../Carousel'
-import { SectionMedia } from '../Media'
 
 export const Section01: Block = {
   fields: [
@@ -88,31 +87,52 @@ export const Section08: Block = {
 }
 
 export const Section09: Block = {
-  fields: [SectionHeading('heading'), SectionContent('copyOne')],
+  fields: [
+    SectionHeading('heading'),
+    SectionContent('copyOne'),
+    SectionMediaBlock('mediaBlockOne'),
+  ],
   interfaceName: 'Section09Block',
   slug: 'section-09-block',
 }
 
 export const Section10: Block = {
-  fields: [...SectionCarousel.fields],
+  fields: [
+    SectionHeading('heading'),
+    SectionContent('copyOne'),
+    SectionContent('copyTwo'),
+    SectionMediaBlock('mediaBlockOne'),
+  ],
   interfaceName: 'Section10Block',
   slug: 'section-10-block',
 }
 
 export const Section11: Block = {
-  fields: [...SectionCarousel.fields, SectionHeading('heading'), SectionContent('copyOne')],
+  fields: [...SectionCarousel.fields],
   interfaceName: 'Section11Block',
   slug: 'section-11-block',
 }
 
 export const Section12: Block = {
-  fields: [...SectionMedia.fields],
+  fields: [SectionHeading('heading'), SectionContent('copyOne')],
   interfaceName: 'Section12Block',
   slug: 'section-12-block',
 }
 
-export const Section13: Block = {
-  fields: [...SectionCarousel.fields],
-  interfaceName: 'Section13Block',
-  slug: 'section-13-block',
-}
+// export const Section11: Block = {
+//   fields: [...SectionCarousel.fields, SectionHeading('heading'), SectionContent('copyOne')],
+//   interfaceName: 'Section11Block',
+//   slug: 'section-11-block',
+// }
+
+// export const Section12: Block = {
+//   fields: [...SectionMedia.fields],
+//   interfaceName: 'Section12Block',
+//   slug: 'section-12-block',
+// }
+
+// export const Section13: Block = {
+//   fields: [...SectionCarousel.fields],
+//   interfaceName: 'Section13Block',
+//   slug: 'section-13-block',
+// }
