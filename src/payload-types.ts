@@ -35,12 +35,18 @@ export interface Config {
   globals: {
     'home-page': HomePage;
     location: Location;
-    navigation: Navigation;
+    partnerships: Partnership;
+    enquire: Enquire;
+    'terms-and-conditions': TermsAndCondition;
+    'privacy-policy': PrivacyPolicy;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
     location: LocationSelect<false> | LocationSelect<true>;
-    navigation: NavigationSelect<false> | NavigationSelect<true>;
+    partnerships: PartnershipsSelect<false> | PartnershipsSelect<true>;
+    enquire: EnquireSelect<false> | EnquireSelect<true>;
+    'terms-and-conditions': TermsAndConditionsSelect<false> | TermsAndConditionsSelect<true>;
+    'privacy-policy': PrivacyPolicySelect<false> | PrivacyPolicySelect<true>;
   };
   locale: null;
   user: User & {
@@ -956,42 +962,135 @@ export interface Location {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "navigation".
+ * via the `definition` "partnerships".
  */
-export interface Navigation {
+export interface Partnership {
   id: number;
-  items?:
-    | (
-        | {
-            link: string;
-            label: string;
-            isDisabled: boolean;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'link';
-          }
-        | Dropdown
-      )[]
-    | null;
+  title: string;
+  asset?:
+    | ({
+        relationTo: 'images';
+        value: number | Image;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: number | Video;
+      } | null);
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Dropdown".
+ * via the `definition` "enquire".
  */
-export interface Dropdown {
-  label: string;
-  links: {
-    link: string;
-    label: string;
-    description: string;
-    isDisabled: boolean;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'dropdown';
+export interface Enquire {
+  id: number;
+  title: string;
+  asset?:
+    | ({
+        relationTo: 'images';
+        value: number | Image;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: number | Video;
+      } | null);
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "terms-and-conditions".
+ */
+export interface TermsAndCondition {
+  id: number;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-policy".
+ */
+export interface PrivacyPolicy {
+  id: number;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1283,22 +1382,17 @@ export interface LocationSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "navigation_select".
+ * via the `definition` "partnerships_select".
  */
-export interface NavigationSelect<T extends boolean = true> {
-  items?:
+export interface PartnershipsSelect<T extends boolean = true> {
+  title?: T;
+  asset?: T;
+  content?: T;
+  meta?:
     | T
     | {
-        link?:
-          | T
-          | {
-              link?: T;
-              label?: T;
-              isDisabled?: T;
-              id?: T;
-              blockName?: T;
-            };
-        dropdown?: T | DropdownSelect<T>;
+        title?: T;
+        description?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1306,21 +1400,53 @@ export interface NavigationSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Dropdown_select".
+ * via the `definition` "enquire_select".
  */
-export interface DropdownSelect<T extends boolean = true> {
-  label?: T;
-  links?:
+export interface EnquireSelect<T extends boolean = true> {
+  title?: T;
+  asset?: T;
+  content?: T;
+  meta?:
     | T
     | {
-        link?: T;
-        label?: T;
+        title?: T;
         description?: T;
-        isDisabled?: T;
-        id?: T;
       };
-  id?: T;
-  blockName?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "terms-and-conditions_select".
+ */
+export interface TermsAndConditionsSelect<T extends boolean = true> {
+  content?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-policy_select".
+ */
+export interface PrivacyPolicySelect<T extends boolean = true> {
+  content?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
