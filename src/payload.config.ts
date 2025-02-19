@@ -79,6 +79,11 @@ export default buildConfig({
   //         },
   //       }),
   sharp,
+  upload: {
+    limits: {
+      fileSize: 20000000,
+    },
+  },
   plugins: [
     computeBlurhash({
       collections: ['images'],
