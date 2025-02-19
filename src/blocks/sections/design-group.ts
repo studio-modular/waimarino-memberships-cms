@@ -119,20 +119,62 @@ export const Section12: Block = {
   slug: 'section-12-block',
 }
 
-// export const Section11: Block = {
-//   fields: [...SectionCarousel.fields, SectionHeading('heading'), SectionContent('copyOne')],
-//   interfaceName: 'Section11Block',
-//   slug: 'section-11-block',
-// }
+export const Section13: Block = {
+  fields: [
+    {
+      type: 'array',
+      fields: [
+        {
+          type: 'text',
+          name: 'heading',
+        },
+        {
+          type: 'text',
+          name: 'link',
+        },
+        {
+          type: 'text',
+          name: 'title',
+        },
+        {
+          type: 'text',
+          name: 'nextToTitle',
+        },
+        {
+          type: 'text',
+          name: 'byline',
+        },
+        {
+          type: 'array',
+          name: 'items',
+          fields: [
+            {
+              type: 'textarea',
+              name: 'label',
+            },
+            {
+              type: 'textarea',
+              name: 'description',
+            },
+          ],
+        },
+        {
+          type: 'richText',
+          name: 'moreDetails',
+          label: 'More Details',
+        },
+      ],
+      name: 'panels',
+      required: true,
+      minRows: 1,
+    },
+  ],
+  interfaceName: 'Section13Block',
+  slug: 'section-13-block',
+}
 
-// export const Section12: Block = {
-//   fields: [...SectionMedia.fields],
-//   interfaceName: 'Section12Block',
-//   slug: 'section-12-block',
-// }
-
-// export const Section13: Block = {
-//   fields: [...SectionCarousel.fields],
-//   interfaceName: 'Section13Block',
-//   slug: 'section-13-block',
-// }
+export const Section14: Block = {
+  fields: [...SectionCarousel.fields, SectionContent('copyOne')],
+  interfaceName: 'Section14Block',
+  slug: 'section-14-block',
+}

@@ -488,6 +488,8 @@ export interface HomePage {
         | Section10Block
         | Section11Block
         | Section12Block
+        | Section13Block
+        | Section14Block
       )[]
     | null;
   meta?: {
@@ -922,6 +924,82 @@ export interface Section12Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Section13Block".
+ */
+export interface Section13Block {
+  panels: {
+    heading?: string | null;
+    link?: string | null;
+    title?: string | null;
+    nextToTitle?: string | null;
+    byline?: string | null;
+    items?:
+      | {
+          label?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    moreDetails?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'section-13-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Section14Block".
+ */
+export interface Section14Block {
+  slides: {
+    asset:
+      | {
+          relationTo: 'images';
+          value: number | Image;
+        }
+      | {
+          relationTo: 'videos';
+          value: number | Video;
+        };
+    description?: string | null;
+    id?: string | null;
+  }[];
+  copyOne: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'section-14-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "location".
  */
 export interface Location {
@@ -951,6 +1029,8 @@ export interface Location {
         | Section10Block
         | Section11Block
         | Section12Block
+        | Section13Block
+        | Section14Block
       )[]
     | null;
   meta?: {
@@ -1115,6 +1195,8 @@ export interface HomePageSelect<T extends boolean = true> {
         'section-10-block'?: T | Section10BlockSelect<T>;
         'section-11-block'?: T | Section11BlockSelect<T>;
         'section-12-block'?: T | Section12BlockSelect<T>;
+        'section-13-block'?: T | Section13BlockSelect<T>;
+        'section-14-block'?: T | Section14BlockSelect<T>;
       };
   meta?:
     | T
@@ -1348,6 +1430,48 @@ export interface Section12BlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Section13Block_select".
+ */
+export interface Section13BlockSelect<T extends boolean = true> {
+  panels?:
+    | T
+    | {
+        heading?: T;
+        link?: T;
+        title?: T;
+        nextToTitle?: T;
+        byline?: T;
+        items?:
+          | T
+          | {
+              label?: T;
+              description?: T;
+              id?: T;
+            };
+        moreDetails?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Section14Block_select".
+ */
+export interface Section14BlockSelect<T extends boolean = true> {
+  slides?:
+    | T
+    | {
+        asset?: T;
+        description?: T;
+        id?: T;
+      };
+  copyOne?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "location_select".
  */
 export interface LocationSelect<T extends boolean = true> {
@@ -1369,6 +1493,8 @@ export interface LocationSelect<T extends boolean = true> {
         'section-10-block'?: T | Section10BlockSelect<T>;
         'section-11-block'?: T | Section11BlockSelect<T>;
         'section-12-block'?: T | Section12BlockSelect<T>;
+        'section-13-block'?: T | Section13BlockSelect<T>;
+        'section-14-block'?: T | Section14BlockSelect<T>;
       };
   meta?:
     | T
