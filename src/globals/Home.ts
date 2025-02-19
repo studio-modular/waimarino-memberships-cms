@@ -24,6 +24,7 @@ import {
   Section22,
   Section23,
   Section24,
+  SectionSeparator,
 } from '../blocks/sections/design-group'
 
 export const HomePage: GlobalConfig = {
@@ -78,6 +79,7 @@ export const HomePage: GlobalConfig = {
         Section22,
         Section23,
         Section24,
+        SectionSeparator,
       ],
     },
   ],

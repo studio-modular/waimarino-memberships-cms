@@ -544,6 +544,7 @@ export interface HomePage {
         | Section22Block
         | Section23Block
         | Section24Block
+        | SectionSeparatorBlock
       )[]
     | null;
   meta?: {
@@ -1392,6 +1393,16 @@ export interface Section24Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SectionSeparatorBlock".
+ */
+export interface SectionSeparatorBlock {
+  isFullWidth?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'section-separator-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "location".
  */
 export interface Location {
@@ -1433,6 +1444,7 @@ export interface Location {
         | Section22Block
         | Section23Block
         | Section24Block
+        | SectionSeparatorBlock
       )[]
     | null;
   meta?: {
@@ -1485,6 +1497,7 @@ export interface Lodge {
         | Section22Block
         | Section23Block
         | Section24Block
+        | SectionSeparatorBlock
       )[]
     | null;
   meta?: {
@@ -1537,6 +1550,7 @@ export interface Membership {
         | Section22Block
         | Section23Block
         | Section24Block
+        | SectionSeparatorBlock
       )[]
     | null;
   meta?: {
@@ -1655,6 +1669,7 @@ export interface RealEstate {
         | Section22Block
         | Section23Block
         | Section24Block
+        | SectionSeparatorBlock
       )[]
     | null;
   meta?: {
@@ -1745,6 +1760,7 @@ export interface HomePageSelect<T extends boolean = true> {
         'section-22-block'?: T | Section22BlockSelect<T>;
         'section-23-block'?: T | Section23BlockSelect<T>;
         'section-24-block'?: T | Section24BlockSelect<T>;
+        'section-separator-block'?: T | SectionSeparatorBlockSelect<T>;
       };
   meta?:
     | T
@@ -2187,6 +2203,15 @@ export interface Section24BlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SectionSeparatorBlock_select".
+ */
+export interface SectionSeparatorBlockSelect<T extends boolean = true> {
+  isFullWidth?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "location_select".
  */
 export interface LocationSelect<T extends boolean = true> {
@@ -2220,6 +2245,7 @@ export interface LocationSelect<T extends boolean = true> {
         'section-22-block'?: T | Section22BlockSelect<T>;
         'section-23-block'?: T | Section23BlockSelect<T>;
         'section-24-block'?: T | Section24BlockSelect<T>;
+        'section-separator-block'?: T | SectionSeparatorBlockSelect<T>;
       };
   meta?:
     | T
@@ -2266,6 +2292,7 @@ export interface LodgeSelect<T extends boolean = true> {
         'section-22-block'?: T | Section22BlockSelect<T>;
         'section-23-block'?: T | Section23BlockSelect<T>;
         'section-24-block'?: T | Section24BlockSelect<T>;
+        'section-separator-block'?: T | SectionSeparatorBlockSelect<T>;
       };
   meta?:
     | T
@@ -2312,6 +2339,7 @@ export interface MembershipSelect<T extends boolean = true> {
         'section-22-block'?: T | Section22BlockSelect<T>;
         'section-23-block'?: T | Section23BlockSelect<T>;
         'section-24-block'?: T | Section24BlockSelect<T>;
+        'section-separator-block'?: T | SectionSeparatorBlockSelect<T>;
       };
   meta?:
     | T
@@ -2392,6 +2420,7 @@ export interface RealEstateSelect<T extends boolean = true> {
         'section-22-block'?: T | Section22BlockSelect<T>;
         'section-23-block'?: T | Section23BlockSelect<T>;
         'section-24-block'?: T | Section24BlockSelect<T>;
+        'section-separator-block'?: T | SectionSeparatorBlockSelect<T>;
       };
   meta?:
     | T

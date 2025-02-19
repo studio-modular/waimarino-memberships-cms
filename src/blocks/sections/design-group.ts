@@ -309,3 +309,15 @@ export const Section24: Block = {
   interfaceName: 'Section24Block',
   slug: 'section-24-block',
 }
+
+export const SectionSeparator: Block = {
+  fields: [
+    {
+      name: 'isFullWidth',
+      type: 'checkbox',
+      defaultValue: false,
+    },
+  ],
+  interfaceName: 'SectionSeparatorBlock',
+  slug: 'section-separator-block',
+}
