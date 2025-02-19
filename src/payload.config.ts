@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -24,6 +25,9 @@ import { Partnerships } from './globals/Partnerships'
 import { Enquire } from './globals/Enquire'
 import { TermsAndConditions } from './globals/TermsAndConditions'
 import { PrivacyPolicy } from './globals/PrivacyPolicy'
+import { Lodge } from './globals/Lodge'
+import { Membership } from './globals/Membership'
+import { RealEstate } from './globals/RealEstate'
 
 invariant(env.PAYLOAD_SECRET)
 invariant(env.DATABASE_URI)
@@ -42,29 +46,39 @@ export default buildConfig({
     },
   },
   collections: [Images, Properties, Users, Videos],
-  globals: [HomePage, Location, Partnerships, Enquire, TermsAndConditions, PrivacyPolicy],
+  globals: [
+    Enquire,
+    HomePage,
+    Location,
+    Lodge,
+    Membership,
+    Partnerships,
+    PrivacyPolicy,
+    RealEstate,
+    TermsAndConditions,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI,
-    },
-  }),
-  // db:
-  //   process.env.NODE_ENV === 'development'
-  //     ? sqliteAdapter({
-  //         client: {
-  //           url: './memberships-app.db',
-  //         },
-  //       })
-  //     : postgresAdapter({
-  //         pool: {
-  //           connectionString: process.env.DATABASE_URI,
-  //         },
-  //       }),
+  // db: postgresAdapter({
+  //   pool: {
+  //     connectionString: process.env.DATABASE_URI,
+  //   },
+  // }),
+  db:
+    process.env.NODE_ENV === 'development'
+      ? sqliteAdapter({
+          client: {
+            url: 'file:./memberships-app.db',
+          },
+        })
+      : postgresAdapter({
+          pool: {
+            connectionString: process.env.DATABASE_URI,
+          },
+        }),
   sharp,
   plugins: [
     computeBlurhash({
@@ -77,7 +91,9 @@ export default buildConfig({
       collections: {
         images: {
           generateFileURL: ({ filename, prefix }) =>
-            `${env.CLOUDFRONT_DISTRIBUTION}/${prefix}/${filename}`,
+            process.env.NODE_ENV === 'development'
+              ? `http://localhost:3000/${filename}`
+              : `${env.CLOUDFRONT_DISTRIBUTION}/${prefix}/${filename}`,
           prefix: 'images',
         },
       },
@@ -89,7 +105,7 @@ export default buildConfig({
         region: env.S3_REGION,
       },
       disableLocalStorage: true,
-      enabled: true,
+      enabled: process.env.NODE_ENV !== 'development',
     }),
     seoPlugin({
       globals: [
@@ -99,6 +115,9 @@ export default buildConfig({
         'partnerships',
         'privacy-policy',
         'terms-and-conditions',
+        'lodge',
+        'real-estate',
+        'membership',
       ],
       collections: ['properties'],
       tabbedUI: true,

@@ -70,6 +70,7 @@ export const Section07: Block = {
     SectionHeading('heading'),
     SectionMediaBlock('mediaBlockOne'),
     SectionContent('copyOne'),
+    SectionContent('copyTwo'),
   ],
   interfaceName: 'Section07Block',
   slug: 'section-07-block',
@@ -177,4 +178,134 @@ export const Section14: Block = {
   fields: [...SectionCarousel.fields, SectionContent('copyOne')],
   interfaceName: 'Section14Block',
   slug: 'section-14-block',
+}
+
+// TODO
+
+export const Section15: Block = {
+  fields: [
+    ...SectionCarousel.fields,
+    SectionHeading('heading'),
+    SectionContent('copyOne'),
+    SectionContent('copyTwo'),
+  ],
+  interfaceName: 'Section15Block',
+  slug: 'section-15-block',
+}
+
+export const Section16: Block = {
+  fields: [
+    SectionHeading('heading'),
+    SectionContent('copyOne'),
+    SectionMediaBlock('mediaBlockOne'),
+  ],
+  interfaceName: 'Section16Block',
+  slug: 'section-16-block',
+}
+
+export const Section17: Block = {
+  fields: [
+    SectionHeading('heading'),
+    SectionHeading('link'),
+    SectionHeading('linkText'),
+    {
+      type: 'array',
+      name: 'milestones',
+      minRows: 1,
+      fields: [
+        {
+          type: 'text',
+          name: 'title',
+          required: true,
+        },
+        {
+          type: 'richText',
+          name: 'content',
+          required: true,
+        },
+      ],
+    },
+  ],
+  interfaceName: 'Section17Block',
+  slug: 'section-17-block',
+}
+
+export const Section18: Block = {
+  fields: [
+    {
+      type: 'array',
+      name: 'panels',
+      fields: [
+        ...SectionCarousel.fields,
+        SectionHeading('title'),
+        SectionHeading('subtitle'),
+        SectionHeading('startingPrice'),
+        SectionContent('copyOne'),
+        SectionHeading('exploreLink'),
+        SectionHeading('bookingLink'),
+      ],
+    },
+  ],
+  interfaceName: 'Section18Block',
+  slug: 'section-18-block',
+}
+
+export const Section19: Block = {
+  fields: [
+    {
+      name: 'title',
+      type: 'textarea',
+      required: true,
+    },
+    {
+      name: 'content',
+      type: 'textarea',
+      required: true,
+    },
+  ],
+  interfaceName: 'Section19Block',
+  slug: 'section-19-block',
+}
+
+export const Section20: Block = {
+  fields: [SectionMediaBlock('mediaBlockOne')],
+  interfaceName: 'Section20Block',
+  slug: 'section-20-block',
+}
+
+export const Section21: Block = {
+  fields: [
+    SectionContent('copyOne'),
+    SectionContent('copyTwo'),
+    SectionMediaBlock('mediaBlockOne'),
+  ],
+  interfaceName: 'Section21Block',
+  slug: 'section-21-block',
+}
+
+export const Section22: Block = {
+  fields: [
+    SectionContent('copyOne'),
+    SectionContent('copyTwo'),
+    SectionMediaBlock('mediaBlockOne'),
+  ],
+  interfaceName: 'Section22Block',
+  slug: 'section-22-block',
+}
+
+export const Section23: Block = {
+  fields: [
+    SectionHeading('heading'),
+    SectionContent('copyOne'),
+    SectionContent('copyTwo'),
+    SectionMediaBlock('mediaBlockOne'),
+  ],
+  interfaceName: 'Section23Block',
+  slug: 'section-23-block',
+}
+
+export const Section24: Block = {
+  fields: [...SectionCarousel.fields],
+  interfaceName: 'Section24Block',
+  slug: 'section-24-block',
 }

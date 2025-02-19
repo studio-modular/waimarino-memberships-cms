@@ -6,7 +6,6 @@ import {
   HeadingFeature,
   ItalicFeature,
   lexicalEditor,
-  LinkFeature,
   OrderedListFeature,
   ParagraphFeature,
   UnderlineFeature,
@@ -33,14 +32,14 @@ export const SectionContent: (name: string) => Field = (name = 'copy') => ({
   name,
   required: true,
   editor: lexicalEditor({
-    features: () => [
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
       BoldFeature(),
       ItalicFeature(),
       UnderlineFeature(),
       ParagraphFeature(),
       UnorderedListFeature(),
       OrderedListFeature(),
-      LinkFeature(),
       HeadingFeature({
         enabledHeadingSizes: ['h2', 'h3'],
       }),

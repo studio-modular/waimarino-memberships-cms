@@ -26,8 +26,8 @@ import {
   Section24,
 } from '../blocks/sections/design-group'
 
-export const HomePage: GlobalConfig = {
-  slug: 'home-page',
+export const Lodge: GlobalConfig = {
+  slug: 'lodge',
   access: {
     read: () => true,
   },
@@ -45,9 +45,9 @@ export const HomePage: GlobalConfig = {
       type: 'relationship',
     },
     {
-      type: 'text',
-      label: 'Arrow Text',
-      name: 'arrowText',
+      type: 'textarea',
+      label: 'Marker Text',
+      name: 'markerText',
     },
     {
       type: 'blocks',

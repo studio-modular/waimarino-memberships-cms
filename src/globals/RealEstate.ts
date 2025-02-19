@@ -26,8 +26,8 @@ import {
   Section24,
 } from '../blocks/sections/design-group'
 
-export const HomePage: GlobalConfig = {
-  slug: 'home-page',
+export const RealEstate: GlobalConfig = {
+  slug: 'real-estate',
   access: {
     read: () => true,
   },
