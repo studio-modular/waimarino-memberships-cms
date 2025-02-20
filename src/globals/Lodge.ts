@@ -46,9 +46,9 @@ export const Lodge: GlobalConfig = {
       type: 'relationship',
     },
     {
-      type: 'textarea',
-      label: 'Marker Text',
-      name: 'markerText',
+      type: 'text',
+      label: 'Arrow Text',
+      name: 'arrowText',
     },
     {
       type: 'blocks',

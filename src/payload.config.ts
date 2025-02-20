@@ -95,9 +95,7 @@ export default buildConfig({
       collections: {
         images: {
           generateFileURL: ({ filename, prefix }) =>
-            process.env.NODE_ENV === 'development'
-              ? `http://localhost:3000/${filename}`
-              : `${env.CLOUDFRONT_DISTRIBUTION}/${prefix}/${filename}`,
+            `${env.CLOUDFRONT_DISTRIBUTION}/${prefix}/${filename}`,
           prefix: 'images',
         },
       },

@@ -46,9 +46,9 @@ export const Location: GlobalConfig = {
       type: 'relationship',
     },
     {
-      type: 'text',
-      label: 'Arrow Text',
-      name: 'arrowText',
+      type: 'textarea',
+      label: 'Marker Text',
+      name: 'markerText',
     },
     {
       type: 'blocks',

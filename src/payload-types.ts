@@ -1417,7 +1417,7 @@ export interface Location {
         relationTo: 'videos';
         value: number | Video;
       } | null);
-  arrowText?: string | null;
+  markerText?: string | null;
   content?:
     | (
         | Section01Block
@@ -1470,7 +1470,7 @@ export interface Lodge {
         relationTo: 'videos';
         value: number | Video;
       } | null);
-  markerText?: string | null;
+  arrowText?: string | null;
   content?:
     | (
         | Section01Block
@@ -2217,7 +2217,7 @@ export interface SectionSeparatorBlockSelect<T extends boolean = true> {
 export interface LocationSelect<T extends boolean = true> {
   title?: T;
   asset?: T;
-  arrowText?: T;
+  markerText?: T;
   content?:
     | T
     | {
@@ -2264,7 +2264,7 @@ export interface LocationSelect<T extends boolean = true> {
 export interface LodgeSelect<T extends boolean = true> {
   title?: T;
   asset?: T;
-  markerText?: T;
+  arrowText?: T;
   content?:
     | T
     | {
