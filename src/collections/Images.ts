@@ -9,16 +9,16 @@ export const Images: CollectionConfig = {
     useAsTitle: 'caption',
   },
   fields: [
-    {
-      type: 'ui',
-      name: 'thumbnail',
-      admin: {
-        components: {
-          Cell: '../components/ThumbnailImageCell.tsx',
-          Field: '../components/ThumbnailImageField.tsx',
-        },
-      },
-    },
+    // {
+    //   type: 'ui',
+    //   name: 'thumbnail',
+    //   admin: {
+    //     components: {
+    //       Cell: '../components/ThumbnailImageCell.tsx',
+    //       Field: '../components/ThumbnailImageField.tsx',
+    //     },
+    //   },
+    // },
     {
       name: 'caption',
       label: 'Caption',
