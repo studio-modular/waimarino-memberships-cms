@@ -43,6 +43,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      afterNavLinks: ['./components/AfterNavLinks.tsx'],
+    },
   },
   collections: [Images, Properties, Users, Videos],
   globals: [

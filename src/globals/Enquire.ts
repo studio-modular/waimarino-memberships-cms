@@ -5,6 +5,15 @@ export const Enquire: GlobalConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async function invalidateEnquire() {
+        process.env.NODE_ENV === 'development'
+          ? fetch('http://localhost:4002/api/vercel/invalidate/Enquire')
+          : fetch('https://waimarino-app.vercel.app/api/vercel/invalidate/Enquire')
+      },
+    ],
+  },
   fields: [
     {
       type: 'text',

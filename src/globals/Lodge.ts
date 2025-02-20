@@ -32,6 +32,15 @@ export const Lodge: GlobalConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async function invalidateLodge() {
+        process.env.NODE_ENV === 'development'
+          ? fetch('http://localhost:4002/api/vercel/invalidate/Lodge')
+          : fetch('https://waimarino-app.vercel.app/api/vercel/invalidate/Lodge')
+      },
+    ],
+  },
   fields: [
     {
       type: 'text',

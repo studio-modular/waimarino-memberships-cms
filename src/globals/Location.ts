@@ -32,6 +32,15 @@ export const Location: GlobalConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async function invalidateLocation() {
+        process.env.NODE_ENV === 'development'
+          ? fetch('http://localhost:4002/api/vercel/invalidate/Location')
+          : fetch('https://waimarino-app.vercel.app/api/vercel/invalidate/Location')
+      },
+    ],
+  },
   fields: [
     {
       type: 'text',

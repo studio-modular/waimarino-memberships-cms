@@ -10,7 +10,15 @@ export const Videos: CollectionConfig = {
   access: {
     read: () => true,
   },
-
+  hooks: {
+    afterChange: [
+      async function invalidateVideos() {
+        process.env.NODE_ENV === 'development'
+          ? fetch('http://localhost:4002/api/vercel/invalidate/Videos')
+          : fetch('https://waimarino-app.vercel.app/api/vercel/invalidate/Videos')
+      },
+    ],
+  },
   fields: [
     ...slugField('title'),
     {

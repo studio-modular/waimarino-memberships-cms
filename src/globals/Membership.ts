@@ -32,6 +32,15 @@ export const Membership: GlobalConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async function invalidateMembership() {
+        process.env.NODE_ENV === 'development'
+          ? fetch('http://localhost:4002/api/vercel/invalidate/Membership')
+          : fetch('https://waimarino-app.vercel.app/api/vercel/invalidate/Membership')
+      },
+    ],
+  },
   fields: [
     {
       type: 'text',

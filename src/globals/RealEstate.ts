@@ -32,6 +32,15 @@ export const RealEstate: GlobalConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async function invalidateRealEstate() {
+        process.env.NODE_ENV === 'development'
+          ? fetch('http://localhost:4002/api/vercel/invalidate/RealEstate')
+          : fetch('https://waimarino-app.vercel.app/api/vercel/invalidate/RealEstate')
+      },
+    ],
+  },
   fields: [
     {
       type: 'text',
