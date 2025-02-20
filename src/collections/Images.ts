@@ -10,6 +10,16 @@ export const Images: CollectionConfig = {
   },
   fields: [
     {
+      type: 'ui',
+      name: 'thumbnail',
+      admin: {
+        components: {
+          Cell: '../components/ThumbnailImageCell.tsx',
+          Field: '../components/ThumbnailImageField.tsx',
+        },
+      },
+    },
+    {
       name: 'caption',
       label: 'Caption',
       type: 'text',
@@ -24,6 +34,7 @@ export const Images: CollectionConfig = {
   ],
   upload: {
     adminThumbnail: 'thumbnail',
+    displayPreview: true,
     imageSizes: [
       {
         height: 300,
