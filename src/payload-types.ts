@@ -653,6 +653,9 @@ export interface SectionCarousel {
           value: number | Video;
         };
     description?: string | null;
+    isFullWidth?: boolean | null;
+    link?: string | null;
+    linkText?: string | null;
     id?: string | null;
   }[];
   id?: string | null;
@@ -674,6 +677,9 @@ export interface SectionMedia {
         value: number | Video;
       };
   description?: string | null;
+  isFullWidth?: boolean | null;
+  link?: string | null;
+  linkText?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'section-media';
@@ -1016,6 +1022,9 @@ export interface Section11Block {
           value: number | Video;
         };
     description?: string | null;
+    isFullWidth?: boolean | null;
+    link?: string | null;
+    linkText?: string | null;
     id?: string | null;
   }[];
   id?: string | null;
@@ -1102,6 +1111,9 @@ export interface Section14Block {
           value: number | Video;
         };
     description?: string | null;
+    isFullWidth?: boolean | null;
+    link?: string | null;
+    linkText?: string | null;
     id?: string | null;
   }[];
   copyOne: {
@@ -1139,6 +1151,9 @@ export interface Section15Block {
           value: number | Video;
         };
     description?: string | null;
+    isFullWidth?: boolean | null;
+    link?: string | null;
+    linkText?: string | null;
     id?: string | null;
   }[];
   heading: string;
@@ -1253,6 +1268,9 @@ export interface Section18Block {
                 value: number | Video;
               };
           description?: string | null;
+          isFullWidth?: boolean | null;
+          link?: string | null;
+          linkText?: string | null;
           id?: string | null;
         }[];
         title: string;
@@ -1440,6 +1458,9 @@ export interface Section24Block {
           value: number | Video;
         };
     description?: string | null;
+    isFullWidth?: boolean | null;
+    link?: string | null;
+    linkText?: string | null;
     id?: string | null;
   }[];
   id?: string | null;
@@ -1725,6 +1746,15 @@ export interface RealEstate {
         | Section23Block
         | Section24Block
         | SectionSeparatorBlock
+        | FullScreenBlock
+        | CarouselBlock
+        | QuestionsBlock
+        | TestimonialBlock
+        | HighlightsBlock
+        | SectionCarouselWithThumbnail
+        | QuoteBlock
+        | SectionMedia
+        | PropertyBlock
       )[]
     | null;
   meta?: {
@@ -1733,6 +1763,232 @@ export interface RealEstate {
   };
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FullScreenBlock".
+ */
+export interface FullScreenBlock {
+  mediaBlockOne: (SectionCarousel | SectionMedia)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'full-screen-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock".
+ */
+export interface CarouselBlock {
+  slides: {
+    asset:
+      | {
+          relationTo: 'images';
+          value: number | Image;
+        }
+      | {
+          relationTo: 'videos';
+          value: number | Video;
+        };
+    description?: string | null;
+    isFullWidth?: boolean | null;
+    link?: string | null;
+    linkText?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuestionsBlock".
+ */
+export interface QuestionsBlock {
+  questions?:
+    | {
+        question: string;
+        answer: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'questions-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock".
+ */
+export interface TestimonialBlock {
+  testimonials?:
+    | {
+        heading?: string | null;
+        content: string;
+        author?: string | null;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonial-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HighlightsBlock".
+ */
+export interface HighlightsBlock {
+  heading?: string | null;
+  highlights: {
+    highlight: string;
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    id?: string | null;
+  }[];
+  asset:
+    | {
+        relationTo: 'images';
+        value: number | Image;
+      }
+    | {
+        relationTo: 'videos';
+        value: number | Video;
+      };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'highlights';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SectionCarouselWithThumbnail".
+ */
+export interface SectionCarouselWithThumbnail {
+  slides: {
+    asset:
+      | {
+          relationTo: 'images';
+          value: number | Image;
+        }
+      | {
+          relationTo: 'videos';
+          value: number | Video;
+        };
+    description?: string | null;
+    isFullWidth?: boolean | null;
+    link?: string | null;
+    linkText?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'section-carousel-with-thumbnail';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuoteBlock".
+ */
+export interface QuoteBlock {
+  quote?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  author?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'quote';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PropertyBlock".
+ */
+export interface PropertyBlock {
+  image: number | Image;
+  logo: number | Image;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  features?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'property-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1860,6 +2116,9 @@ export interface SectionCarouselSelect<T extends boolean = true> {
     | {
         asset?: T;
         description?: T;
+        isFullWidth?: T;
+        link?: T;
+        linkText?: T;
         id?: T;
       };
   id?: T;
@@ -1872,6 +2131,9 @@ export interface SectionCarouselSelect<T extends boolean = true> {
 export interface SectionMediaSelect<T extends boolean = true> {
   asset?: T;
   description?: T;
+  isFullWidth?: T;
+  link?: T;
+  linkText?: T;
   id?: T;
   blockName?: T;
 }
@@ -2033,6 +2295,9 @@ export interface Section11BlockSelect<T extends boolean = true> {
     | {
         asset?: T;
         description?: T;
+        isFullWidth?: T;
+        link?: T;
+        linkText?: T;
         id?: T;
       };
   id?: T;
@@ -2084,6 +2349,9 @@ export interface Section14BlockSelect<T extends boolean = true> {
     | {
         asset?: T;
         description?: T;
+        isFullWidth?: T;
+        link?: T;
+        linkText?: T;
         id?: T;
       };
   copyOne?: T;
@@ -2100,6 +2368,9 @@ export interface Section15BlockSelect<T extends boolean = true> {
     | {
         asset?: T;
         description?: T;
+        isFullWidth?: T;
+        link?: T;
+        linkText?: T;
         id?: T;
       };
   heading?: T;
@@ -2155,6 +2426,9 @@ export interface Section18BlockSelect<T extends boolean = true> {
           | {
               asset?: T;
               description?: T;
+              isFullWidth?: T;
+              link?: T;
+              linkText?: T;
               id?: T;
             };
         title?: T;
@@ -2251,6 +2525,9 @@ export interface Section24BlockSelect<T extends boolean = true> {
     | {
         asset?: T;
         description?: T;
+        isFullWidth?: T;
+        link?: T;
+        linkText?: T;
         id?: T;
       };
   id?: T;
@@ -2476,6 +2753,15 @@ export interface RealEstateSelect<T extends boolean = true> {
         'section-23-block'?: T | Section23BlockSelect<T>;
         'section-24-block'?: T | Section24BlockSelect<T>;
         'section-separator-block'?: T | SectionSeparatorBlockSelect<T>;
+        'full-screen-block'?: T | FullScreenBlockSelect<T>;
+        'carousel-block'?: T | CarouselBlockSelect<T>;
+        'questions-block'?: T | QuestionsBlockSelect<T>;
+        'testimonial-block'?: T | TestimonialBlockSelect<T>;
+        highlights?: T | HighlightsBlockSelect<T>;
+        'section-carousel-with-thumbnail'?: T | SectionCarouselWithThumbnailSelect<T>;
+        quote?: T | QuoteBlockSelect<T>;
+        'section-media'?: T | SectionMediaSelect<T>;
+        'property-block'?: T | PropertyBlockSelect<T>;
       };
   meta?:
     | T
@@ -2486,6 +2772,127 @@ export interface RealEstateSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FullScreenBlock_select".
+ */
+export interface FullScreenBlockSelect<T extends boolean = true> {
+  mediaBlockOne?:
+    | T
+    | {
+        'section-carousel'?: T | SectionCarouselSelect<T>;
+        'section-media'?: T | SectionMediaSelect<T>;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock_select".
+ */
+export interface CarouselBlockSelect<T extends boolean = true> {
+  slides?:
+    | T
+    | {
+        asset?: T;
+        description?: T;
+        isFullWidth?: T;
+        link?: T;
+        linkText?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuestionsBlock_select".
+ */
+export interface QuestionsBlockSelect<T extends boolean = true> {
+  questions?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock_select".
+ */
+export interface TestimonialBlockSelect<T extends boolean = true> {
+  testimonials?:
+    | T
+    | {
+        heading?: T;
+        content?: T;
+        author?: T;
+        link?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HighlightsBlock_select".
+ */
+export interface HighlightsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  highlights?:
+    | T
+    | {
+        highlight?: T;
+        description?: T;
+        id?: T;
+      };
+  asset?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SectionCarouselWithThumbnail_select".
+ */
+export interface SectionCarouselWithThumbnailSelect<T extends boolean = true> {
+  slides?:
+    | T
+    | {
+        asset?: T;
+        description?: T;
+        isFullWidth?: T;
+        link?: T;
+        linkText?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuoteBlock_select".
+ */
+export interface QuoteBlockSelect<T extends boolean = true> {
+  quote?: T;
+  author?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PropertyBlock_select".
+ */
+export interface PropertyBlockSelect<T extends boolean = true> {
+  image?: T;
+  logo?: T;
+  description?: T;
+  features?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

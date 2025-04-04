@@ -321,3 +321,70 @@ export const SectionSeparator: Block = {
   interfaceName: 'SectionSeparatorBlock',
   slug: 'section-separator-block',
 }
+
+export const FullScreen: Block = {
+  fields: [SectionMediaBlock('mediaBlockOne')],
+  interfaceName: 'FullScreenBlock',
+  slug: 'full-screen-block',
+}
+
+export const Carousel: Block = {
+  fields: [...SectionCarousel.fields],
+  interfaceName: 'CarouselBlock',
+  slug: 'carousel-block',
+}
+
+export const Questions: Block = {
+  fields: [
+    {
+      fields: [
+        {
+          name: 'question',
+          required: true,
+          type: 'text',
+        },
+        {
+          name: 'answer',
+          required: true,
+          type: 'richText',
+        },
+      ],
+      minRows: 1,
+      name: 'questions',
+      type: 'array',
+    },
+  ],
+  interfaceName: 'QuestionsBlock',
+  slug: 'questions-block',
+}
+
+export const Testimonials: Block = {
+  fields: [
+    {
+      fields: [
+        {
+          name: 'heading',
+          type: 'text',
+        },
+        {
+          name: 'content',
+          required: true,
+          type: 'textarea',
+        },
+        {
+          name: 'author',
+          type: 'text',
+        },
+        {
+          name: 'link',
+          type: 'text',
+        },
+      ],
+      minRows: 1,
+      name: 'testimonials',
+      type: 'array',
+    },
+  ],
+  interfaceName: 'TestimonialBlock',
+  slug: 'testimonial-block',
+}

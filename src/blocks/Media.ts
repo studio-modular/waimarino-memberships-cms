@@ -1,16 +1,15 @@
-import { LabelField, LinkField, VariantField } from '@/fields/link'
 import type { Block } from 'payload'
-import WidthField from '~/fields/width'
+
+import { LabelField, LinkField, VariantField } from '@/fields/link'
+import WidthField from '@/fields/width'
 
 export const MediaBlock: Block = {
-  slug: 'media',
-  interfaceName: 'MediaBlock',
   fields: [
     {
-      name: 'asset',
       label: 'Asset',
-      required: true,
+      name: 'asset',
       relationTo: ['images', 'videos'],
+      required: true,
       type: 'relationship',
     },
     {
@@ -22,34 +21,52 @@ export const MediaBlock: Block = {
       type: 'text',
     },
     {
-      type: 'array',
-      name: 'buttons',
       fields: [LinkField, LabelField, VariantField],
+      name: 'buttons',
+      type: 'array',
     },
     {
-      type: 'checkbox',
-      name: 'isFullScreen',
-      label: 'Full Screen?',
       defaultValue: false,
+      label: 'Full Screen?',
+      name: 'isFullScreen',
+      type: 'checkbox',
     },
     WidthField,
   ],
+  interfaceName: 'MediaBlock',
+  slug: 'media',
 }
 
 export const SectionMedia: Block = {
-  slug: 'section-media',
-  interfaceName: 'SectionMedia',
   fields: [
     {
-      name: 'asset',
       label: 'Asset',
-      required: true,
+      name: 'asset',
       relationTo: ['images', 'videos'],
+      required: true,
       type: 'relationship',
     },
     {
       name: 'description',
       type: 'text',
     },
+    {
+      defaultValue: true,
+      label: 'Full Width?',
+      name: 'isFullWidth',
+      type: 'checkbox',
+    },
+    {
+      name: 'link',
+      required: false,
+      type: 'text',
+    },
+    {
+      name: 'linkText',
+      required: false,
+      type: 'text',
+    },
   ],
+  interfaceName: 'SectionMedia',
+  slug: 'section-media',
 }

@@ -1,32 +1,48 @@
 import type { Block } from 'payload'
+
+import WidthField from '@/fields/width'
+
 import { MediaBlock, SectionMedia } from './Media'
-import WidthField from '~/fields/width'
 
 export const CarouselBlock: Block = {
-  slug: 'carousel',
-  interfaceName: 'CarouselBlock',
   fields: [
     {
-      type: 'array',
-      required: true,
+      fields: [...MediaBlock.fields],
       minRows: 1,
       name: 'slides',
-      fields: [...MediaBlock.fields],
+      required: true,
+      type: 'array',
     },
     WidthField,
   ],
+  interfaceName: 'CarouselBlock',
+  slug: 'carousel',
 }
 
 export const SectionCarousel: Block = {
-  slug: 'section-carousel',
-  interfaceName: 'SectionCarousel',
   fields: [
     {
-      type: 'array',
-      required: true,
+      fields: [...SectionMedia.fields],
       minRows: 1,
       name: 'slides',
-      fields: [...SectionMedia.fields],
+      required: true,
+      type: 'array',
     },
   ],
+  interfaceName: 'SectionCarousel',
+  slug: 'section-carousel',
+}
+
+export const SectionCarouselWithThumbnail: Block = {
+  fields: [
+    {
+      fields: [...SectionMedia.fields],
+      minRows: 1,
+      name: 'slides',
+      required: true,
+      type: 'array',
+    },
+  ],
+  interfaceName: 'SectionCarouselWithThumbnail',
+  slug: 'section-carousel-with-thumbnail',
 }

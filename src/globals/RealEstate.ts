@@ -1,5 +1,8 @@
 import type { GlobalConfig } from 'payload'
 import {
+  Carousel,
+  FullScreen,
+  Questions,
   Section01,
   Section02,
   Section03,
@@ -25,7 +28,13 @@ import {
   Section23,
   Section24,
   SectionSeparator,
+  Testimonials,
 } from '../blocks/sections/design-group'
+import Highlights from '~/blocks/highlights'
+import { SectionCarouselWithThumbnail } from '~/blocks/Carousel'
+import { QuoteBlock } from '~/blocks/quote'
+import { SectionMedia } from '~/blocks/Media'
+import { PropertyBlock } from '~/blocks/property'
 
 export const RealEstate: GlobalConfig = {
   slug: 'real-estate',
@@ -35,8 +44,8 @@ export const RealEstate: GlobalConfig = {
   hooks: {
     afterChange: [
       async function invalidateRealEstate() {
-        process.env.NODE_ENV === 'development'
-          ? fetch('http://localhost:4002/api/vercel/invalidate/RealEstate')
+        return process.env.NODE_ENV === 'development'
+          ? fetch('http://localhost:3001/api/vercel/invalidate/RealEstate')
           : fetch('https://waimarino-app.vercel.app/api/vercel/invalidate/RealEstate')
       },
     ],
@@ -89,6 +98,15 @@ export const RealEstate: GlobalConfig = {
         Section23,
         Section24,
         SectionSeparator,
+        FullScreen,
+        Carousel,
+        Questions,
+        Testimonials,
+        Highlights,
+        SectionCarouselWithThumbnail,
+        QuoteBlock,
+        SectionMedia,
+        PropertyBlock,
       ],
     },
   ],
