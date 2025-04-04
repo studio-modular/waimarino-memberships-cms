@@ -30,11 +30,11 @@ import {
   SectionSeparator,
   Testimonials,
 } from '../blocks/sections/design-group'
-import Highlights from '~/blocks/highlights'
+import Highlights from '~/blocks/Highlights'
 import { SectionCarouselWithThumbnail } from '~/blocks/Carousel'
-import { QuoteBlock } from '~/blocks/quote'
+import { QuoteBlock } from '~/blocks/Quote'
 import { SectionMedia } from '~/blocks/Media'
-import { PropertyBlock } from '~/blocks/property'
+import { PropertyBlock } from '~/blocks/Property'
 
 export const RealEstate: GlobalConfig = {
   slug: 'real-estate',
